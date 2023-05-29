@@ -23,7 +23,7 @@ To start the Netlife simulation, follow these steps:
 1. Run the following command in the terminal:
 
    ```
-   python netlife.py
+   python3 netlife.py
    ```
 
 2. A new window will open displaying the grid of cells.
