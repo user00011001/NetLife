@@ -1,6 +1,7 @@
 import torch
 import random
 import tkinter as tk
+from tkinter import ttk
 import torch.nn as nn
 import torch.optim as optim
 
