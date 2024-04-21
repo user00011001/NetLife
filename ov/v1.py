@@ -25,12 +25,11 @@ class Cell:
         self.optimizer = optim.Adam(self.neural_net.parameters())
         self.state = torch.tensor([random.randint(0, 1)], dtype=torch.float32)
         self.color = f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}"
-        self.time_alive = 0  # To store the time for which the cell is alive
+        self.time_alive = 0 
 
     def predict_next_state(self, neighborhood):
         self.optimizer.zero_grad()
         
-        # Defining target state based on neighborhood conditions
         active_neighbors = sum(neighborhood)
         if active_neighbors < 2 or active_neighbors > 3:
             target_state = torch.tensor([0.], dtype=torch.float32)  # Underpopulation or Overpopulation
@@ -39,18 +38,16 @@ class Cell:
 
         predicted_state = self.neural_net(torch.tensor(neighborhood, dtype=torch.float32))
 
-        # Adding a time-dependent reward to the loss function
         reward = torch.tensor([self.time_alive], dtype=torch.float32)
         loss = (predicted_state - target_state) ** 2 - reward
         loss.backward()
         self.optimizer.step()
 
-        # Update state and time alive
         self.state = predicted_state.detach().clone()
         if self.state.item() > 0.5:
             self.time_alive += 1
         else:
-            self.time_alive = 0  # Reset time alive if the cell is not in an active state
+            self.time_alive = 0
 
 
 class Grid:
