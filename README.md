@@ -1,4 +1,4 @@
-#NetLife
+# NetLife
 
 This Python script demonstrates a simulation of cells controlled by individual neural networks. The cells interact with their neighbors and evolve over time based on the predictions made by their neural networks.
 
